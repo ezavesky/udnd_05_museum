@@ -5,7 +5,7 @@ TBD
 ### Table of Contents
 1. [Introduction to the application](#Introduction)
    1. [Personas](#Personas)
-2. [Creating the Puzzler](#Creating-the-Puzzler)
+2. [Creating the Puzzler](#Creating-the-Museum)
    1. [Background](#Background)
    2. [Interactions](#Interactions)
       1. [Gameplay](#Gameplay)
@@ -19,6 +19,15 @@ TBD
 
 ## Personas
 TBD
+
+### Abi
+* Occupation: Student
+* Age: teenager
+* Quote: "While I'm interested in STEM participation, I'm not sure where I fit into what I'm hearing."
+* Description: Linda is a typical teenager with early interests in science.  She completed some coding exercises on her own and went to afterschool clubs that offered some Lego and robotics assembly.  On her own, she watches online videos about various maker topics but still spends a lot of time in social apps like Musically.  She has her own phoen but thus far hasn't been intersted in VR specifically.  Linda has a healthy set of extracirrcular activitives like soccer and manages most of her time obligations by herself.
+* Experience with VR: Little, mostly experimentations
+* [pexels.com source](https://www.pexels.com/photo/girl-learning-person-studying-159810/)
+* ![example photo](photos/photo_abi.jpg)
 
 ### Jill
 * Occupation: Network Engineer

@@ -8,7 +8,8 @@ TBND
 
 ## Project Contents
 Quick description of contents within this repo.
-![Puzzler Overview](docs/screen_fullview.jpg)
+
+![Museum Overview](docs/screen_fullview.jpg)
 
 * Assets - assets including GoogleVR SDK clips for project
 * ProjectSettings - project settings for builds
@@ -29,8 +30,7 @@ Software and build environment requirements.
 
 * [Unity 2017.1.0p4](https://unity3d.com/get-unity/download/archive)
 * [GVR Unity SDK v1.70.0](https://github.com/googlevr/gvr-unity-sdk/releases/tag/v1.70.0)
-* Course starter materials
 * Android KitKat 4.4 or later
 
 ### Extra Assets
-A few extra assets were used in the creation of this project.  A best effort attempt includes the original source for this content and associated *free* AssetStore Assets (placed in the [extra](Assets/extra) folder).
+A few extra assets were used in the creation of this project.  A best effort attempt includes the original source for this content and associated *free* AssetStore Assets (placed in the [extra](Assets/external) folder).

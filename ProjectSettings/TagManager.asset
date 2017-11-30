@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - puzzleBall
+  - movementCapable
   layers:
   - Default
   - TransparentFX

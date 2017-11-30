@@ -35,3 +35,6 @@ sysinfo.txt
 
 # skip some assets
 .DS_Store
+
+# ifnore some protected assets
+**/ProCore*

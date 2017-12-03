@@ -7,20 +7,10 @@ public class RaycastMovement : MonoBehaviour {
 	public GameObject player;
 	public GameObject raycastIndicator;
 
-	public float height = 2;
-	public bool teleport = false;
-
 	public float maxMoveDistance = 10;
-
-	private bool moving = false;
 
 	RaycastHit hit;
 	float theDistance;
-
-	// Use this for initialization
-	void Start () {
-
-	}
 
 	// Simple Macro for click detection
 	bool Clicked() {
@@ -35,6 +25,7 @@ public class RaycastMovement : MonoBehaviour {
 		//Debug.DrawRay (raycastHolder.transform.position, forwardDir, Color.green);
 
 		if (Physics.Raycast (raycastHolder.transform.position, (forwardDir), out hit)) {
+			//Debug.Log (hit.collider.gameObject);
 			if (hit.collider.gameObject.tag == "movementCapable") {
 				ManageIndicator ();
 				if (hit.distance <= maxMoveDistance) { //If we are close enough
@@ -42,25 +33,27 @@ public class RaycastMovement : MonoBehaviour {
 					if (raycastIndicator.activeSelf == false) {
 						raycastIndicator.SetActive (true);
 					}
+					//update hit
+					//Debug.Log(hit.point);
+					gameObject.GetComponent<GameController> ().navpoint = hit.point;
 				} else {
 					if (raycastIndicator.activeSelf == true) {
 						raycastIndicator.SetActive (false);
 					}
 				}
+			} else {
+				ManageIndicator (false);
 			}
 		}
 	}
 
-	public void TriggerMove() {
-		if (teleport) {
-			teleportMove (hit.point);
-		} else {
-			DashMove (hit.point);
+	public void ManageIndicator(bool enabled=true) {
+		raycastIndicator.SetActive (enabled);
+		if (!enabled) {
+			return;
 		}
-	}
-
-
-	public void ManageIndicator() {
+		raycastIndicator.transform.position = hit.point;
+		/*
 		if (!teleport) {
 			if (moving != true) {
 				raycastIndicator.transform.position = hit.point;
@@ -71,15 +64,7 @@ public class RaycastMovement : MonoBehaviour {
 
 		} else {
 			raycastIndicator.transform.position = hit.point;
-		}
+		}*/
 	}
-	public void DashMove(Vector3 location) {
-		moving = true;
-//		Debug.Log ("Position:" + location);
-//		Debug.Log ("Previous:" + player.transform);
-		player.transform.DOMove (new Vector3 (location.x, location.y + height, location.z), 0.2f).SetEase (Ease.Linear);
-	}
-	public void teleportMove(Vector3 location) {
-		player.transform.position = new Vector3 (location.x, location.y + height, location.z);
-	}
+
 }

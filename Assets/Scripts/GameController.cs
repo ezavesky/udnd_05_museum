@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour {
 		public string name;
 	}
 
-	public float moveSpeed = 1f;
+	public float moveSpeed = 4f;
 	public float moveHeight = 1.5f;
 	public GameObject objPlayer;
 	public Waypoint[] waypoints;
@@ -130,6 +130,12 @@ public class GameController : MonoBehaviour {
 
 	public void MovePlayer(Vector3 posNew, Quaternion rotNew, bool dash=true, float moveDelay=0.0f) {
 		Vector3 positionGo = posNew;
+		if (posNew == objPlayer.transform.position) {	// if point is not new, do nothing
+			return;
+		}
+		// update the position
+		float moveDuration = Vector3.Distance (objPlayer.transform.position, positionGo) / moveSpeed;
+		//Debug.Log ("speed: " + moveSpeed + ", dist: " + moveDuration);
 		positionGo.y += moveHeight;
 		_navpoint = positionGo;
 		if (!dash) {
@@ -139,7 +145,7 @@ public class GameController : MonoBehaviour {
 		}
 
 		Sequence mySequence = DOTween.Sequence();
-		mySequence.Append (objPlayer.transform.DOMove (positionGo, moveSpeed).SetEase (Ease.Linear));
+		mySequence.Append (objPlayer.transform.DOMove (positionGo, moveDuration).SetEase (Ease.Linear));
 		if (moveDelay > 0f) {
 			mySequence.PrependInterval (moveDelay);
 			//TweenSettingsExtensions.Prepend(mySequence, moveDelay);

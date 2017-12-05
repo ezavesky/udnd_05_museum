@@ -7,7 +7,7 @@ public class RaycastMovement : MonoBehaviour {
 	public GameObject player;
 	public GameObject raycastIndicator;
 
-	public float maxMoveDistance = 10;
+	//public float maxMoveDistance = 10;
 
 	RaycastHit hit;
 	float theDistance;
@@ -28,7 +28,7 @@ public class RaycastMovement : MonoBehaviour {
 			//Debug.Log (hit.collider.gameObject);
 			if (hit.collider.gameObject.tag == "movementCapable") {
 				ManageIndicator ();
-				if (hit.distance <= maxMoveDistance) { //If we are close enough
+				if (true) { // no max dist -- if (hit.distance <= maxMoveDistance) { //If we are close enough
 					//If the indicator isn't active already make it active.
 					if (raycastIndicator.activeSelf == false) {
 						raycastIndicator.SetActive (true);

@@ -38,3 +38,4 @@ sysinfo.txt
 
 # ifnore some protected assets
 **/ProCore*
+raw/**

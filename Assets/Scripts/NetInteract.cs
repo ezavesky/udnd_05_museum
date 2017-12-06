@@ -20,7 +20,7 @@ public class NetInteract : MonoBehaviour {
 	}
 	protected class NetData {
 		public Vector3 startScale;
-		public float startPos = 0f;
+		public Vector3 startPos;
 	}
 	public NetPoint[] netPoints;
 	protected NetData[] netData;
@@ -35,7 +35,7 @@ public class NetInteract : MonoBehaviour {
 				netPoints [i].objSlice.transform.localScale.x,
 				netPoints [i].objSlice.transform.localScale.y,
 				netPoints [i].objSlice.transform.localScale.z);
-			netData[i].startPos = netPoints [i].objSlice.transform.position.z;
+			netData[i].startPos = netPoints [i].objSlice.transform.localPosition;
 		}
 		if (netPoints.Length > 0) {
 			ZoomIn (netPoints [0].objSlice);
@@ -65,8 +65,11 @@ public class NetInteract : MonoBehaviour {
 		} else if (netSelected == idx) {
 			return;
 		}
+
+		Vector3 posLocal = new Vector3(netData[idx].startPos.x, netData[idx].startPos.y+moveMax, netData[idx].startPos.z);
+		Vector3 posGlobal = objTarget.transform.parent.TransformPoint(posLocal);
 		netSelected = idx;
-		objTarget.transform.DOMoveZ (netData[idx].startPos + moveMax, duration, false);
+		objTarget.transform.DOMove (posGlobal, duration, false);
 		objTarget.transform.DOScale (netData[idx].startScale * scaleMax, duration);
 		ZoomClickNonRecuse (idx);
 		//Debug.Log ("ZOOM IN: " + idx + ", target: " + netPoints[idx].name);
@@ -77,12 +80,14 @@ public class NetInteract : MonoBehaviour {
 		if (idx == -1) {
 			return;
 		}
-		objTarget.transform.DOMoveZ (netData[idx].startPos, duration, false);
+		Vector3 posGlobal = objTarget.transform.parent.TransformPoint(netData[idx].startPos);
+		netSelected = idx;
+		objTarget.transform.DOMove (posGlobal, duration, false);
 		objTarget.transform.DOScale (netData[idx].startScale, duration);
 		//Debug.Log ("ZOOM OUT: " + idx + ", target: " + netPoints[idx].name);
 	}
 
-	public void ZoomClickSlice (GameObject objTarget) {
+	public void ClickSlice (GameObject objTarget) {
 		int idx = FindTarget (objTarget, true);
 		if (idx == -1) {
 			return;
@@ -90,7 +95,7 @@ public class NetInteract : MonoBehaviour {
 		ZoomIn (netPoints[idx].objSlice);
 	}
 
-	public void ZoomClick (GameObject objTarget) {
+	public void ClickImage (GameObject objTarget) {
 		int idx = FindTarget (objTarget, false);
 		if (idx == -1) {
 			return;

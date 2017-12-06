@@ -11,6 +11,7 @@ public class NetInteract : MonoBehaviour {
 	public float duration = 1f;
 	public Text objTextDesc;
 	public Text objTextTitle;
+	public GameObject objAudio;
 
 	[Serializable]
 	public class NetPoint {
@@ -71,7 +72,7 @@ public class NetInteract : MonoBehaviour {
 		netSelected = idx;
 		objTarget.transform.DOMove (posGlobal, duration, false);
 		objTarget.transform.DOScale (netData[idx].startScale * scaleMax, duration);
-		ZoomClickNonRecuse (idx);
+		ZoomClickNonRecurse (idx);
 		//Debug.Log ("ZOOM IN: " + idx + ", target: " + netPoints[idx].name);
 	}
 	
@@ -103,7 +104,7 @@ public class NetInteract : MonoBehaviour {
 		ZoomIn (netPoints[idx].objSlice);
 	}
 
-	protected void ZoomClickNonRecuse (int idx) {
+	protected void ZoomClickNonRecurse (int idx) {
 		switch (netPoints [idx].name) {
 		default:
 			objTextTitle.text = "Easter Egg!";
@@ -187,6 +188,9 @@ public class NetInteract : MonoBehaviour {
 				"of hackers who adapt and tailor techniques to the target environment. Their goal is usually to "+
 				"steal data over an extended period by hiding and “persisting”.";
 			break;
+		}
+		if (objAudio) {
+			objAudio.GetComponent<GvrAudioSource>().Play ();
 		}
 
 		//Debug.Log ("CLICK: " + idx + ", target: " + netPoints[idx].name);

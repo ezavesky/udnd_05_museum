@@ -38,7 +38,10 @@ TBD
 * [link to this quiz post](https://discussions.udacity.com/t/quiz-responses-create-a-persona-for-puzzler/203143/220?u=robotvisiondr), [pexels.com source](https://www.pexels.com/photo/adult-brainstorming-business-career-440588/)
 * ![example photo](photos/photo_jill.jpg)
 
-# Creating the Puzzler
+# Creating the Museum
+* Problems with Network - lay objects over for easier interaction
+* Problems with video - jumpy mp4 files for skybox like usage; find video sources
+from youtube but not using them now
 TBD
 
 ## Background

@@ -31,8 +31,19 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	public Vector3 playerPosition { 
+		get {
+			return objPlayer.transform.position;
+		}
+	}
 
-	public enum GameState { STATE_INVALID, STATE_STARTUP }
+	public bool IsLocked {
+		get {
+			return (gameState==GameState.STATE_ENGAGED);
+		}
+	}
+
+	public enum GameState { STATE_INVALID, STATE_STARTUP, STATE_ENGAGED, STATE_NORMAL }
 	private GameState gameState = GameState.STATE_INVALID;
 	//private GameState gameAutoProgress = GameState.STATE_INVALID;
 
@@ -82,6 +93,12 @@ public class GameController : MonoBehaviour {
 		case "start":
 			SetGameState (GameState.STATE_STARTUP);
 			break;
+		case "locked":
+			SetGameState (GameState.STATE_ENGAGED);
+			break;
+		case "normal":
+			SetGameState (GameState.STATE_NORMAL);
+			break;
 		default:
 			break;
 		}
@@ -108,8 +125,10 @@ public class GameController : MonoBehaviour {
 			ManipulateDoor (false);
 			//gameAutoProgress = GameState.STATE_PUZZLE1;
 			//objHud.ActivateHUD ("Welcome to the Puzzle, version 1.");
-
-
+			break;
+		case GameState.STATE_ENGAGED:
+			break;
+		case GameState.STATE_NORMAL:
 			break;
 		}
 		Debug.Log ("GameController: Entering new state: " + gameState);
@@ -125,14 +144,24 @@ public class GameController : MonoBehaviour {
 	/// Moves player to next navigation point (via dash, not teleport)
 	/// </summary>
 	public void MovePlayer() {
-		MovePlayer (_navpoint, objPlayer.transform.rotation, true);
+		MovePlayer (_navpoint);
 	}
 
-	public void MovePlayer(Vector3 posNew, Quaternion rotNew, bool dash=true, float moveDelay=0.0f) {
+	public void MovePlayer(Vector3 posNew, bool dash=true, float moveDelay=0.0f, Vector3[] posPath=null) {
+		MovePlayer (posNew, objPlayer.transform.rotation, dash, moveDelay, posPath);
+	}
+
+	public void MovePlayer(Vector3 posNew, Quaternion rotNew, 
+							bool dash=true, float moveDelay=0.0f, Vector3[] posPath=null) {
+		if (this.IsLocked) {
+			Debug.Log ("Warning, move requested but game state is locked!");
+			return;
+		}
 		Vector3 positionGo = posNew;
 		if (posNew == objPlayer.transform.position) {	// if point is not new, do nothing
 			return;
 		}
+			
 		// update the position
 		float moveDuration = Vector3.Distance (objPlayer.transform.position, positionGo) / moveSpeed;
 		//Debug.Log ("speed: " + moveSpeed + ", dist: " + moveDuration);

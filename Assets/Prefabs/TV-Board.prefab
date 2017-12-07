@@ -157,7 +157,7 @@ Transform:
   m_GameObject: {fileID: 1936165514203978}
   m_LocalRotation: {x: 0.27059808, y: 0.6532815, z: 0.6532815, w: -0.27059808}
   m_LocalPosition: {x: 8.37, y: 2.62, z: 8.18}
-  m_LocalScale: {x: 2.6242175, y: 2.6242151, z: 2.6242154}
+  m_LocalScale: {x: 2.624233, y: 2.6242225, z: 2.6242223}
   m_Children:
   - {fileID: 224327489544981096}
   m_Father: {fileID: 0}
@@ -225,7 +225,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 51
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 63
     m_Alignment: 4
@@ -384,7 +384,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 51
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 63
     m_Alignment: 4
@@ -393,9 +393,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Created by Eric Zavesky - 2017
-
-'
+  m_Text: Created by Eric Zavesky - 2017
 --- !u!114 &114886592548698304
 MonoBehaviour:
   m_ObjectHideFlags: 1

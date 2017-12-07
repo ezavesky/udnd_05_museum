@@ -4,7 +4,6 @@ using DG.Tweening;
 
 public class RaycastMovement : MonoBehaviour {
 	public GameObject raycastHolder;
-	public GameObject player;
 	public GameObject raycastIndicator;
 
 	//public float maxMoveDistance = 10;

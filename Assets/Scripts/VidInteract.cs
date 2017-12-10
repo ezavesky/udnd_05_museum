@@ -8,7 +8,8 @@ public class VidInteract : MonoBehaviour {
 	/// <summary>
 	/// waypoint for video experience
 	/// </summary>
-	public GameObject[] objWaypointExp;
+	public GameObject[] objWaypointEnter;
+	public GameObject[] objWaypointExit;
 
 	/// <summary>
 	/// transform for position resume after experience
@@ -107,7 +108,7 @@ public class VidInteract : MonoBehaviour {
 	/// </summary>
 	public void StartExperience() {
 		resumePosition = gameController.playerPosition;
-		gameController.MovePlayer (objWaypointExp [objWaypointExp.Length - 1].transform.position);
+		gameController.MovePlayer (objWaypointEnter [objWaypointEnter.Length - 1].transform.position, objWaypointEnter);
 		simulatorActive = true;
 //		gameController.MovePlayer(
 //		public void MovePlayer(Vector3 posNew, Quaternion rotNew, bool dash=true, 
@@ -123,7 +124,7 @@ public class VidInteract : MonoBehaviour {
 		simulatorActive = false;
 		UpdateSimulator (Vector3.zero);
 		gameController.SetGameState (GameController.GameState.STATE_NORMAL);
-		gameController.MovePlayer (resumePosition);
+		gameController.MovePlayer (resumePosition, objWaypointExit);
 	}
 
 	public void UpdateEncodeStrength(float value) {		

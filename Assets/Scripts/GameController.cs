@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using DG.Tweening;
+﻿using System.Collections.Generic;
 using System;
+using UnityEngine;
+using System.Collections;
+using DG.Tweening;
 
 public class GameController : MonoBehaviour {
 	public GameObject objDoor;
@@ -121,8 +121,7 @@ public class GameController : MonoBehaviour {
 			Camera.main.DOColor (Color.black, 2).From ();
 			objLocal = FindWaypoint ("start");
 			objLocal.SetActive (true);
-			MovePlayer (objLocal.transform.position, objLocal.transform.rotation, false);
-			ManipulateDoor (false);
+			MovePlayer (objLocal.transform.position, objLocal.transform.rotation, null, false);
 			//gameAutoProgress = GameState.STATE_PUZZLE1;
 			//objHud.ActivateHUD ("Welcome to the Puzzle, version 1.");
 			break;
@@ -135,7 +134,7 @@ public class GameController : MonoBehaviour {
 
 		//allow position and rotation to move...
 		if (objActive) {
-			MovePlayer (objActive.transform.position, objActive.transform.rotation, true, moveDelay);
+			MovePlayer (objActive.transform.position, objActive.transform.rotation, null, true, moveDelay);
 		}
 	}
 		
@@ -147,12 +146,12 @@ public class GameController : MonoBehaviour {
 		MovePlayer (_navpoint);
 	}
 
-	public void MovePlayer(Vector3 posNew, bool dash=true, float moveDelay=0.0f, Vector3[] posPath=null) {
-		MovePlayer (posNew, objPlayer.transform.rotation, dash, moveDelay, posPath);
+	public void MovePlayer(Vector3 posNew, GameObject[] objPath=null, bool dash=true, float moveDelay=0.0f) {
+		MovePlayer (posNew, objPlayer.transform.rotation, objPath, dash, moveDelay);
 	}
 
-	public void MovePlayer(Vector3 posNew, Quaternion rotNew, 
-							bool dash=true, float moveDelay=0.0f, Vector3[] posPath=null) {
+	public void MovePlayer(Vector3 posNew, Quaternion rotNew, GameObject[] objPath=null, 
+							bool dash=true, float moveDelay=0.0f) {
 		if (this.IsLocked) {
 			Debug.Log ("Warning, move requested but game state is locked!");
 			return;
@@ -162,8 +161,6 @@ public class GameController : MonoBehaviour {
 			return;
 		}
 			
-		// update the position
-		float moveDuration = Vector3.Distance (objPlayer.transform.position, positionGo) / moveSpeed;
 		//Debug.Log ("speed: " + moveSpeed + ", dist: " + moveDuration);
 		positionGo.y += moveHeight;
 		_navpoint = positionGo;
@@ -173,43 +170,40 @@ public class GameController : MonoBehaviour {
 			return;
 		}
 
-		Sequence mySequence = DOTween.Sequence();
-		mySequence.Append (objPlayer.transform.DOMove (positionGo, moveDuration).SetEase (Ease.Linear));
-		if (moveDelay > 0f) {
-			mySequence.PrependInterval (moveDelay);
-			//TweenSettingsExtensions.Prepend(mySequence, moveDelay);
-		}
-	}
+		//disabled for now -- method for navigating along path with tween
+		if (false) {  /* posPath != null) {
+			//convert from objects into positions
+			Vector3[] posPath = new Vector3[objPath.Length];
+			for (int i=0; i<objPath.Length; i++) {
+				posPath[i] = objPath[i].transform.position;
+			}
 
-	public GameState GetGameState()
-	{
-		return gameState;
-	}
+			// update the position
+			float moveDuration = Vector3.Distance (objPlayer.transform.position, posPath[0]) / moveSpeed;
+			for (int i = 1; i < posPath.Length; i++) {
+				moveDuration += Vector3.Distance (posPath[i-1], posPath[i]) / moveSpeed;
+			}
+			moveDuration += Vector3.Distance (posPath[posPath.Length-1], positionGo) / moveSpeed;
 
-
-	void ManipulateDoor(bool activate) {
-		/*
-		positionDoor [1].SetActive (activate);
-		positionDoor [0].SetActive (!activate);
-		if (activate) { 
-			iTween.MoveTo(objDoor, 
-				iTween.Hash(
-					"position", positionDoor[1].transform.position, 
-					"time", 1, "delay", 1.5f,
-					"easetype", "easeInExpo"
-				)
-			);
+			//start actual tween
+			Tween t = objPlayer.transform.DOPath(waypoints, moveDuration, PathType.CatmullRom)
+				.SetOptions(true)
+				.SetLookAt(0.001f);
+			// Then set the ease to Linear 
+			t.SetEase(Ease.Linear);
+			if (moveDelay > 0f) {
+				t.SetDelay (moveDelay);
+			}*/
+		} else {
+			// compute duration by speed
+			float moveDuration = Vector3.Distance (objPlayer.transform.position, positionGo) / moveSpeed;
+			Sequence mySequence = DOTween.Sequence ();
+			mySequence.Append (objPlayer.transform.DOMove (positionGo, moveDuration).SetEase (Ease.Linear));
+			if (moveDelay > 0f) {
+				mySequence.PrependInterval (moveDelay);
+				//TweenSettingsExtensions.Prepend(mySequence, moveDelay);
+			}
 		}
-		else {
-			iTween.MoveTo(objDoor, 
-				iTween.Hash(
-					"position", positionDoor[0].transform.position, 
-					"time", 1, 
-					"easetype", "easeOutExpo"
-				)
-			);
-		}
-		*/
 	}
 
 }

@@ -5,11 +5,20 @@ using DG.Tweening;
 public class RaycastMovement : MonoBehaviour {
 	public GameObject raycastHolder;
 	public GameObject raycastIndicator;
+	/// <summary>
+	/// Centeral game controller
+	/// </summary>
+	protected GameController gameController;
 
 	//public float maxMoveDistance = 10;
 
 	RaycastHit hit;
 	float theDistance;
+
+	void Start() {
+		GameObject objTag = GameObject.FindGameObjectsWithTag ("GameController") [0];
+		gameController = objTag.GetComponent<GameController>();
+	}
 
 	// Simple Macro for click detection
 	bool Clicked() {
@@ -19,6 +28,9 @@ public class RaycastMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (gameController.IsLocked) {
+			return;
+		}
 
 		Vector3 forwardDir = raycastHolder.transform.TransformDirection (Vector3.forward) * 100;
 		//Debug.DrawRay (raycastHolder.transform.position, forwardDir, Color.green);
@@ -35,11 +47,11 @@ public class RaycastMovement : MonoBehaviour {
 					//update hit
 					//Debug.Log(hit.point);
 					gameObject.GetComponent<GameController> ().navpoint = hit.point;
-				} else {
+				} /* else {
 					if (raycastIndicator.activeSelf == true) {
 						raycastIndicator.SetActive (false);
 					}
-				}
+				} */
 			} else {
 				ManageIndicator (false);
 			}

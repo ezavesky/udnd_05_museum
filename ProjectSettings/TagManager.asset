@@ -6,6 +6,7 @@ TagManager:
   tags:
   - movementCapable
   - streamSimulator
+  - planHouse
   layers:
   - Default
   - TransparentFX

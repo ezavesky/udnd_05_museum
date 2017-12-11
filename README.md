@@ -38,6 +38,8 @@ https://answers.unity.com/questions/17409/best-video-preparation-for-unity.html
     * make a game or inspectino requirement for net room
     * make additional info panel for various videos (net, vid360, plan, etc)
     * improve lighting of toy city in net room
+    * add walking sound to movement
+    * add ceiling lighting for main room
 
 
 ## Requirements
@@ -49,3 +51,8 @@ Software and build environment requirements.
 
 ### Extra Assets
 A few extra assets were used in the creation of this project.  A best effort attempt includes the original source for this content and associated *free* AssetStore Assets (placed in the [extra](Assets/external) folder).
+
+* https://www.pexels.com/photo/android-blur-cellular-close-up-301718/
+* https://www.pexels.com/photo/gray-smartphone-37864/
+* http://custommapmakers.org/skyboxes.php
+* Rug texture - http://www.lughertexture.com/carpet/rug-contemporary-8-2889

@@ -45,8 +45,8 @@ https://answers.unity.com/questions/17409/best-video-preparation-for-unity.html
 ## Requirements
 Software and build environment requirements.
 
-* [Unity 2017.1.0p4](https://unity3d.com/get-unity/download/archive)
-* [GVR Unity SDK v1.70.0](https://github.com/googlevr/gvr-unity-sdk/releases/tag/v1.70.0)
+* [Unity 2017.3.0f3](https://unity3d.com/get-unity/download/archive)
+* [GVR Unity SDK v1.60.0](https://github.com/googlevr/gvr-unity-sdk/releases/tag/v1.60.0)
 * Android KitKat 4.4 or later
 
 ### Extra Assets
@@ -56,3 +56,4 @@ A few extra assets were used in the creation of this project.  A best effort att
 * https://www.pexels.com/photo/gray-smartphone-37864/
 * http://custommapmakers.org/skyboxes.php
 * Rug texture - http://www.lughertexture.com/carpet/rug-contemporary-8-2889
+* Simplify Art - http://simplify.thatsh.it/

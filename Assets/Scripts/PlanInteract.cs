@@ -79,8 +79,6 @@ public class PlanInteract : MonoBehaviour {
 		gak[1].time = 1;
 		gradientGame.SetKeys(gck, gak);
 		listGame = new List<PlanNode> ();
-
-		RestartExperience ();
 	}
 
 	// Update is called once per frame
@@ -129,7 +127,6 @@ public class PlanInteract : MonoBehaviour {
 		//create required objects
 		//turn on or off different objects
 		//allow interaction of devices to turn on or off network impact
-
 
 		GameObject[] objHome = GameObject.FindGameObjectsWithTag (tagHomes);
 		List<int> listIdx = Enumerable.Range(0, objHome.Length).ToList();

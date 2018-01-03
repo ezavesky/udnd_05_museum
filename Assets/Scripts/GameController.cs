@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 	public GameObject objDoor;
@@ -66,14 +67,25 @@ public class GameController : MonoBehaviour {
 
 		//force start at the beginning
 		navpoint = objPlayer.transform.position;
-		SetGameState (GameState.STATE_STARTUP);
 		/*iTween.CameraFadeFrom(iTween.Hash
 			"amount", 0, "time", 2.0f
 		);*/
+
+		//load our different scenes
+		//SceneManager.LoadScene("ScenePlayer", LoadSceneMode.Additive);
+		//SceneManager.LoadScene("RoomWelcome", LoadSceneMode.Additive);
+
 	}
 	
 	// Update is called once per frame
 	protected void Update () {
+		//initialize the game
+		if (gameState == GameState.STATE_INVALID) {
+			SetGameState (GameState.STATE_STARTUP);
+			SetGameState (GameState.STATE_NORMAL);
+		}
+
+
 		if (timeAutoAction > 0.0f && Time.time>timeAutoAction) {
 			if (autoDisable) {
 				autoDisable.SetActive (false);
@@ -144,6 +156,10 @@ public class GameController : MonoBehaviour {
 	/// </summary>
 	public void MovePlayer() {
 		MovePlayer (_navpoint);
+	}
+
+	public void Clicked() {
+		Debug.Log("CLICKED!");
 	}
 
 	public void MovePlayer(Vector3 posNew, GameObject[] objPath=null, bool dash=true, float moveDelay=0.0f) {

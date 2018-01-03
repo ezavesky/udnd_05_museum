@@ -6,8 +6,29 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Main.unity
-    guid: 479e4f7da358a8a4ab131c3e603654e9
-  - enabled: 1
+    path: Assets/Scenes/ScenePlayer.unity
+    guid: 9db9dbb0b413940449c057ceef87a75d
+  - enabled: 0
     path: Assets/Scenes/Museum.unity
     guid: 1af21ca54f7d74a3d9fc7463ff283e08
+  - enabled: 0
+    path: Assets/Scenes/RoomWelcome.unity
+    guid: 7ec8a049d0d3f48a0acdc1bc9702b7be
+  - enabled: 0
+    path: Assets/Scenes/Room360.unity
+    guid: e3c520eb9f4574313ad2ac0951fa7d3f
+  - enabled: 0
+    path: Assets/Scenes/RoomCache.unity
+    guid: 8b1badde04fb44acb8f004c53dee78c3
+  - enabled: 0
+    path: Assets/Scenes/RoomContent.unity
+    guid: f9344584bf7d744b9a89f00ee0fc5188
+  - enabled: 0
+    path: Assets/Scenes/RoomNetwork.unity
+    guid: fea9d58302b6547528ceba574bc03197
+  - enabled: 0
+    path: Assets/Scenes/RoomPlanning.unity
+    guid: af21a943f91d1434d8ce56691cca9bcd
+  - enabled: 1
+    path: Assets/Scenes/Recovery.unity
+    guid: 9ae45992c4a82483eae4fdd5462a6cba

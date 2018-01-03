@@ -20,12 +20,13 @@ public class RaycastMovement : MonoBehaviour {
 		gameController = objTag.GetComponent<GameController>();
 	}
 
+/* 
 	// Simple Macro for click detection
 	bool Clicked() {
 		//return Input.GetMouseButtonDown (0);
 		return (Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began);
 	}
-
+*/
 	// Update is called once per frame
 	void Update () {
 		if (gameController.IsLocked) {

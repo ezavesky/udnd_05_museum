@@ -133,7 +133,9 @@ public class GameController : MonoBehaviour {
 			Camera.main.DOColor (Color.black, 2).From ();
 			objLocal = FindWaypoint ("start");
 			objLocal.SetActive (true);
-			MovePlayer (objLocal.transform.position, objLocal.transform.rotation, null, false);
+			Quaternion targetRotation = objLocal.transform.rotation;
+			targetRotation.x = targetRotation.z = 0;
+			MovePlayer (objLocal.transform.position, targetRotation, null, false);
 			//gameAutoProgress = GameState.STATE_PUZZLE1;
 			//objHud.ActivateHUD ("Welcome to the Puzzle, version 1.");
 			break;

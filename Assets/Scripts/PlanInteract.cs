@@ -98,6 +98,7 @@ public class PlanInteract : MonoBehaviour {
 		timeStart = Time.fixedTime;
 		gameRunning = true;
 		gameController.SetGameState (GameController.GameState.STATE_ENGAGED);
+		gameController.AnalyticsEnter("Planning");
 		RestartExperience ();
 	}
 
@@ -108,6 +109,7 @@ public class PlanInteract : MonoBehaviour {
 		gameRunning = false;
 		gameController.SetGameState (GameController.GameState.STATE_NORMAL);
 		gameController.MovePlayer (resumePosition, objWaypointExit);
+		gameController.AnalyticsExit("Planning");
 	}
 
 	/// <summary>
@@ -119,6 +121,7 @@ public class PlanInteract : MonoBehaviour {
 			Destroy (item.gameObject);
 		}
 		listGame.Clear ();
+		gameController.AnalyticsEnter("PlanningRestart");
 
 		//need to repopulate it?
 		timeStart = Time.fixedTime;

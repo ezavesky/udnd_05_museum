@@ -53,7 +53,6 @@ public class VidInteract : MonoBehaviour {
 	void Start () {
 		GameObject objTag = GameObject.FindGameObjectsWithTag ("GameController") [0];
 		gameController = objTag.GetComponent<GameController>();
-
 		/*
 		if (objSlider) {	// update slider if provided
 			float valSlider = (distHalfLife - DECAY_MIN) / (DECAY_MAX - DECAY_MIN);
@@ -115,6 +114,7 @@ public class VidInteract : MonoBehaviour {
 //			float moveDelay=0.0f, Vector3[] posPath=null) {
 //
 		gameController.SetGameState (GameController.GameState.STATE_ENGAGED);
+		gameController.AnalyticsEnter("Vid360");
 	}
 
 	/// <summary>
@@ -125,6 +125,7 @@ public class VidInteract : MonoBehaviour {
 		UpdateSimulator (Vector3.zero);
 		gameController.SetGameState (GameController.GameState.STATE_NORMAL);
 		gameController.MovePlayer (resumePosition, objWaypointExit);
+		gameController.AnalyticsExit("Vid360");
 	}
 
 	public void UpdateEncodeStrength(float value) {		

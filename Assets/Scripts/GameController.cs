@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;  // Reference the Unity Analytics namespace
 
 public class GameController : MonoBehaviour {
 	public GameObject objDoor;
@@ -31,6 +32,9 @@ public class GameController : MonoBehaviour {
 			_navpoint = value;
 		}
 	}
+
+	//method for tracking entry/egress for areas and actions
+	protected Dictionary<string, float> dictTimeTracker;
 
 	public GameObject raycastIndicator;
 
@@ -66,6 +70,7 @@ public class GameController : MonoBehaviour {
 	protected void Start () {
 		//disable all the waypoints because they contain other objects
 		//FindWaypoint["start"].SetActive(false);
+		dictTimeTracker = new Dictionary<string, float> ();
 
 		//force start at the beginning
 		navpoint = objPlayer.transform.position;
@@ -78,7 +83,37 @@ public class GameController : MonoBehaviour {
 		//SceneManager.LoadScene("RoomWelcome", LoadSceneMode.Additive);
 
 	}
+
+	public void AnalyticsTrigger(string strEvent) {
+		//called when game mechanics don't know if it's enter or exit (e.g. a wall trigger)
+		if (dictTimeTracker.ContainsKey(strEvent)) {
+			AnalyticsExit(strEvent);
+			return;
+		}
+		AnalyticsEnter(strEvent);
+	}
 	
+	public void AnalyticsEnter(string strEvent) {
+		dictTimeTracker[strEvent] = Time.fixedTime;
+		Analytics.CustomEvent(strEvent, new Dictionary<string, object>{
+			{"timeGame", Time.fixedTime}
+		});
+	}	
+
+	public void AnalyticsExit(string strEvent, string keyProp=null, object valProp=null) {
+		Dictionary<string, object> dictEvent = new Dictionary<string, object>();
+		if (dictTimeTracker.ContainsKey(strEvent)) {
+			dictEvent.Add("ellapsed", Time.fixedTime - dictTimeTracker[strEvent]);
+			dictEvent.Add("timeGame", Time.fixedTime);
+			dictTimeTracker.Remove(strEvent);
+		}
+		if (keyProp != null && valProp != null) {
+			dictEvent.Add(keyProp, valProp);
+		}
+		Analytics.CustomEvent(strEvent, dictEvent);
+	}	
+
+
 	// Update is called once per frame
 	protected void Update () {
 		//initialize the game

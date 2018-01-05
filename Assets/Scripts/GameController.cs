@@ -32,6 +32,8 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	public GameObject raycastIndicator;
+
 	public Vector3 playerPosition { 
 		get {
 			return objPlayer.transform.position;
@@ -157,11 +159,9 @@ public class GameController : MonoBehaviour {
 	/// Moves player to next navigation point (via dash, not teleport)
 	/// </summary>
 	public void MovePlayer() {
-		MovePlayer (_navpoint);
-	}
-
-	public void Clicked() {
-		Debug.Log("CLICKED!");
+		if (raycastIndicator.activeSelf) {
+			MovePlayer (_navpoint);
+		}
 	}
 
 	public void MovePlayer(Vector3 posNew, GameObject[] objPath=null, bool dash=true, float moveDelay=0.0f) {

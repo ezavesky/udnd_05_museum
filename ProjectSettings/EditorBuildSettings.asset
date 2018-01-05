@@ -5,15 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/RoomContent.unity
-    guid: f9344584bf7d744b9a89f00ee0fc5188
-  - enabled: 0
-    path: Assets/Scenes/RoomNetwork.unity
-    guid: fea9d58302b6547528ceba574bc03197
-  - enabled: 0
-    path: Assets/Scenes/RoomPlanning.unity
-    guid: af21a943f91d1434d8ce56691cca9bcd
   - enabled: 1
     path: Assets/Scenes/Museum.unity
     guid: 9ae45992c4a82483eae4fdd5462a6cba

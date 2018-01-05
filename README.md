@@ -33,9 +33,8 @@ https://answers.unity.com/questions/17409/best-video-preparation-for-unity.html
     * transcode videos for performance
     * add furniture to main room for NOC-style viewership
     * add moving videos or something dynamic to displays in main room
-    * modify waslking paths for video and net room sto use dopath
-    * add custom logos to outside parts of each room
-    * make a game or inspectino requirement for net room
+    * modify walking paths for video and net rooms to use dopath
+    * make a game or inspection requirement for net room
     * make additional info panel for various videos (net, vid360, plan, etc)
     * improve lighting of toy city in net room
     * add walking sound to movement

@@ -52,6 +52,8 @@ TBD
 
 ### Gameplay
 TBD
+* Creating [analytics triggers](https://stackoverflow.com/a/23052854)
+
 
 # User testing
 ## Initial Usability

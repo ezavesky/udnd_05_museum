@@ -56,3 +56,5 @@ A few extra assets were used in the creation of this project.  A best effort att
 * http://custommapmakers.org/skyboxes.php
 * Rug texture - http://www.lughertexture.com/carpet/rug-contemporary-8-2889
 * Simplify Art - http://simplify.thatsh.it/
+* https://soundcloud.com/the-mighty-low/ice-waves-rock-ambient-light-up-tempo-inspiring
+* https://www.soundjay.com/footsteps-1.html

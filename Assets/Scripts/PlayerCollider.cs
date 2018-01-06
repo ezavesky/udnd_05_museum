@@ -15,6 +15,12 @@ public class PlayerCollider : MonoBehaviour {
 		
         Debug.Log("PlayerTrigger: " + other.gameObject.name);
 		gameController.AnalyticsTrigger(other.gameObject.name);
+
+		//trigger volume toggle for rooms as entered..
+		VolumeToggle volToggle = other.gameObject.GetComponent<VolumeToggle>();
+		if (volToggle != null) {
+			volToggle.Toggle();
+		}
     }
 	/* 
     void OnCollisionEnter(Collision collision) {

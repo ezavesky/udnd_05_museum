@@ -90,7 +90,7 @@ public class GameController : MonoBehaviour {
 	}
 	public void WalkStop() {
 		if (soundMove) {
-			soundMove.Stop();
+			soundMove.Pause();
 		}
 		soundStop = -1.0f;
 	}

@@ -33,11 +33,6 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	//method for tracking entry/egress for areas and actions
-	protected Dictionary<string, float> dictTimeTracker;
-
-	public GameObject raycastIndicator;
-
 	public Vector3 playerPosition { 
 		get {
 			return objPlayer.transform.position;
@@ -78,11 +73,33 @@ public class GameController : MonoBehaviour {
 			"amount", 0, "time", 2.0f
 		);*/
 
-		//load our different scenes
-		//SceneManager.LoadScene("ScenePlayer", LoadSceneMode.Additive);
-		//SceneManager.LoadScene("RoomWelcome", LoadSceneMode.Additive);
-
+		//configure sound
+		soundMove = objPlayer.GetComponent<GvrAudioSource>();
 	}
+	
+	/// --------------- walking/movement sound emulation  ----------------------
+	private GvrAudioSource soundMove;
+	private float soundStop = -1.0f;
+	public void WalkStart(float fDuration, float fRate=1.0f) {
+		if (soundMove) {
+			if (soundStop < 0.0f) {		//only if not going, restart
+				soundMove.Play();
+			}
+			soundStop = Time.fixedTime + fDuration;
+		}
+	}
+	public void WalkStop() {
+		if (soundMove) {
+			soundMove.Stop();
+		}
+		soundStop = -1.0f;
+	}
+
+
+	/// --------------- methods for analytics tracking --------------------
+	//method for tracking entry/egress for areas and actions
+	protected Dictionary<string, float> dictTimeTracker;
+	public GameObject raycastIndicator;
 
 	public void AnalyticsTrigger(string strEvent) {
 		//called when game mechanics don't know if it's enter or exit (e.g. a wall trigger)
@@ -122,6 +139,10 @@ public class GameController : MonoBehaviour {
 			SetGameState (GameState.STATE_NORMAL);
 		}
 
+		//trigger stop of walking?
+		if (soundStop > 0.0f && soundStop < Time.fixedTime) {
+			WalkStop();
+		}
 
 		if (timeAutoAction > 0.0f && Time.time>timeAutoAction) {
 			if (autoDisable) {
@@ -190,6 +211,8 @@ public class GameController : MonoBehaviour {
 	}
 		
 
+	/// ---------------- player movement capabilities --------------------
+
 	/// <summary>
 	/// Moves player to next navigation point (via dash, not teleport)
 	/// </summary>
@@ -220,6 +243,7 @@ public class GameController : MonoBehaviour {
 		if (!dash) {
 			objPlayer.transform.position = positionGo;
 			objPlayer.transform.rotation = rotNew;
+			WalkStop();
 			return;
 		}
 
@@ -256,6 +280,7 @@ public class GameController : MonoBehaviour {
 				mySequence.PrependInterval (moveDelay);
 				//TweenSettingsExtensions.Prepend(mySequence, moveDelay);
 			}
+			WalkStart(moveDuration);
 		}
 	}
 

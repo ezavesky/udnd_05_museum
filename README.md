@@ -30,14 +30,12 @@ https://answers.unity.com/questions/17409/best-video-preparation-for-unity.html
 * Unity color pallete for low-vision - http://bconnelly.net/2013/10/creating-colorblind-friendly-figures/, http://www.perbang.dk/rgbgradient/
 
 * Future TODO:
-    * transcode videos for performance
     * add furniture to main room for NOC-style viewership
     * add moving videos or something dynamic to displays in main room
     * modify walking paths for video and net rooms to use dopath
     * make a game or inspection requirement for net room
     * make additional info panel for various videos (net, vid360, plan, etc)
     * improve lighting of toy city in net room
-    * add walking sound to movement
     * add ceiling lighting for main room
 
 

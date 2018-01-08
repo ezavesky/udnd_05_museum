@@ -2,15 +2,11 @@
 using System;
 using UnityEngine;
 using System.Collections;
-using DG.Tweening;
 using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;  // Reference the Unity Analytics namespace
 
 public class GameController : MonoBehaviour {
-	public GameObject objDoor;
-	public GameObject[] positionDoor = new GameObject[2];
-
-	//public HudInteraction objHud;
+	public GameObject objCameraScreen = null;
 
 	[Serializable]
 	public class Waypoint {
@@ -69,9 +65,6 @@ public class GameController : MonoBehaviour {
 
 		//force start at the beginning
 		navpoint = objPlayer.transform.position;
-		/*iTween.CameraFadeFrom(iTween.Hash
-			"amount", 0, "time", 2.0f
-		);*/
 
 		//configure sound
 		soundMove = objPlayer.GetComponent<GvrAudioSource>();
@@ -188,7 +181,9 @@ public class GameController : MonoBehaviour {
 		case GameState.STATE_INVALID:
 			return;
 		case GameState.STATE_STARTUP:
-			Camera.main.DOColor (Color.black, 2).From ();
+			if (objCameraScreen != null) {
+				LeanTween.alpha(objCameraScreen, to:0.0f, time:2.0f);
+			}
 			objLocal = FindWaypoint ("start");
 			objLocal.SetActive (true);
 			Quaternion targetRotation = objLocal.transform.rotation;
@@ -248,7 +243,7 @@ public class GameController : MonoBehaviour {
 		}
 
 		//disabled for now -- method for navigating along path with tween
-		if (false) {  /* posPath != null) {
+		if (objPath != null) {
 			//convert from objects into positions
 			Vector3[] posPath = new Vector3[objPath.Length];
 			for (int i=0; i<objPath.Length; i++) {
@@ -263,21 +258,18 @@ public class GameController : MonoBehaviour {
 			moveDuration += Vector3.Distance (posPath[posPath.Length-1], positionGo) / moveSpeed;
 
 			//start actual tween
-			Tween t = objPlayer.transform.DOPath(waypoints, moveDuration, PathType.CatmullRom)
-				.SetOptions(true)
-				.SetLookAt(0.001f);
-			// Then set the ease to Linear 
-			t.SetEase(Ease.Linear);
+			LTDescr ltDesc = LeanTween.move(objPlayer, posPath, moveDuration).setEase( LeanTweenType.linear );
+			//	.SetLookAt(0.001f);
 			if (moveDelay > 0f) {
-				t.SetDelay (moveDelay);
-			}*/
+				ltDesc.setDelay (moveDelay);
+				//TweenSettingsExtensions.Prepend(mySequence, moveDelay);
+			}
 		} else {
 			// compute duration by speed
 			float moveDuration = Vector3.Distance (objPlayer.transform.position, positionGo) / moveSpeed;
-			Sequence mySequence = DOTween.Sequence ();
-			mySequence.Append (objPlayer.transform.DOMove (positionGo, moveDuration).SetEase (Ease.Linear));
+			LTDescr ltDesc = LeanTween.move(objPlayer, positionGo, moveDuration).setEase( LeanTweenType.linear );
 			if (moveDelay > 0f) {
-				mySequence.PrependInterval (moveDelay);
+				ltDesc.setDelay (moveDelay);
 				//TweenSettingsExtensions.Prepend(mySequence, moveDelay);
 			}
 			WalkStart(moveDuration);

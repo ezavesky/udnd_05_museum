@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using DG.Tweening;
 
 public class RaycastMovement : MonoBehaviour {
 	public GameObject raycastHolder;

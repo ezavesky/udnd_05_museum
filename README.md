@@ -37,7 +37,10 @@ https://answers.unity.com/questions/17409/best-video-preparation-for-unity.html
     * make additional info panel for various videos (net, vid360, plan, etc)
     * improve lighting of toy city in net room
     * add ceiling lighting for main room
-
+    * sound too loud in cache room
+    * fix render texture of main click path (hide it?)
+    * tween audio in/out for room
+    * trim walking audio to loop better (gap in last step)
 
 ## Requirements
 Software and build environment requirements.

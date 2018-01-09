@@ -245,10 +245,12 @@ public class GameController : MonoBehaviour {
 		//disabled for now -- method for navigating along path with tween
 		if (objPath != null) {
 			//convert from objects into positions
-			Vector3[] posPath = new Vector3[objPath.Length];
+			Vector3[] posPath = new Vector3[objPath.Length+2];
 			for (int i=0; i<objPath.Length; i++) {
 				posPath[i] = objPath[i].transform.position;
+				posPath[i].y += moveHeight;
 			}
+			posPath[objPath.Length+1] = posPath[objPath.Length] = positionGo;
 
 			// update the position
 			float moveDuration = Vector3.Distance (objPlayer.transform.position, posPath[0]) / moveSpeed;
@@ -258,12 +260,14 @@ public class GameController : MonoBehaviour {
 			moveDuration += Vector3.Distance (posPath[posPath.Length-1], positionGo) / moveSpeed;
 
 			//start actual tween
-			LTDescr ltDesc = LeanTween.move(objPlayer, posPath, moveDuration).setEase( LeanTweenType.linear );
+			LTSpline curvePath = new LTSpline(posPath);
+			LTDescr ltDesc = LeanTween.moveSpline(objPlayer, curvePath.pts, moveDuration).setEase( LeanTweenType.linear );
 			//	.SetLookAt(0.001f);
 			if (moveDelay > 0f) {
 				ltDesc.setDelay (moveDelay);
 				//TweenSettingsExtensions.Prepend(mySequence, moveDelay);
 			}
+			WalkStart(moveDuration+moveDelay);
 		} else {
 			// compute duration by speed
 			float moveDuration = Vector3.Distance (objPlayer.transform.position, positionGo) / moveSpeed;
@@ -272,7 +276,7 @@ public class GameController : MonoBehaviour {
 				ltDesc.setDelay (moveDelay);
 				//TweenSettingsExtensions.Prepend(mySequence, moveDelay);
 			}
-			WalkStart(moveDuration);
+			WalkStart(moveDuration+moveDelay);
 		}
 	}
 

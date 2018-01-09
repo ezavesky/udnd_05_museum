@@ -32,15 +32,12 @@ https://answers.unity.com/questions/17409/best-video-preparation-for-unity.html
 * Future TODO:
     * add furniture to main room for NOC-style viewership
     * add moving videos or something dynamic to displays in main room
-    * modify walking paths for video and net rooms to use dopath
     * make a game or inspection requirement for net room
     * make additional info panel for various videos (net, vid360, plan, etc)
     * improve lighting of toy city in net room
     * add ceiling lighting for main room
-    * sound too loud in cache room
     * fix render texture of main click path (hide it?)
-    * tween audio in/out for room
-    * trim walking audio to loop better (gap in last step)
+    * tween audio in/out for room video room
 
 ## Requirements
 Software and build environment requirements.

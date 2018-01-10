@@ -246,14 +246,15 @@ public class GameController : MonoBehaviour {
 		if (objPath != null) {
 			//convert from objects into positions
 			Vector3[] posPath = new Vector3[objPath.Length+2];
+			posPath[0] = objPlayer.transform.position;
 			for (int i=0; i<objPath.Length; i++) {
-				posPath[i] = objPath[i].transform.position;
-				posPath[i].y += moveHeight;
+				posPath[i+1] = objPath[i].transform.position;
+				posPath[i+1].y += moveHeight;
 			}
-			posPath[objPath.Length+1] = posPath[objPath.Length] = positionGo;
+			posPath[posPath.Length-1] = positionGo;
 
 			// update the position
-			float moveDuration = Vector3.Distance (objPlayer.transform.position, posPath[0]) / moveSpeed;
+			float moveDuration = 0f;
 			for (int i = 1; i < posPath.Length; i++) {
 				moveDuration += Vector3.Distance (posPath[i-1], posPath[i]) / moveSpeed;
 			}

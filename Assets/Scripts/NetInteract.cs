@@ -69,8 +69,8 @@ public class NetInteract : MonoBehaviour {
 		Vector3 posLocal = new Vector3(netData[idx].startPos.x, netData[idx].startPos.y+moveMax, netData[idx].startPos.z);
 		Vector3 posGlobal = objTarget.transform.parent.TransformPoint(posLocal);
 		netSelected = idx;
-		LTDescr ltDescM = LeanTween.move(objTarget, posGlobal, duration).setEase( LeanTweenType.easeInQuad );
-		LTDescr ltDescS = LeanTween.scale(objTarget, netData[idx].startScale * scaleMax, duration).setEase( LeanTweenType.easeInQuad );
+		/*LTDescr ltDescM = */LeanTween.move(objTarget, posGlobal, duration).setEase( LeanTweenType.easeInQuad );
+		/*LTDescr ltDescS = */LeanTween.scale(objTarget, netData[idx].startScale * scaleMax, duration).setEase( LeanTweenType.easeInQuad );
 		ZoomClickNonRecurse (idx);
 		//Debug.Log ("ZOOM IN: " + idx + ", target: " + netPoints[idx].name);
 	}
@@ -82,8 +82,8 @@ public class NetInteract : MonoBehaviour {
 		}
 		Vector3 posGlobal = objTarget.transform.parent.TransformPoint(netData[idx].startPos);
 		netSelected = idx;
-		LTDescr ltDescM = LeanTween.move(objTarget, posGlobal, duration).setEase( LeanTweenType.easeOutQuad );
-		LTDescr ltDescS = LeanTween.scale(objTarget, netData[idx].startScale, duration).setEase( LeanTweenType.easeOutQuad );
+		/* LTDescr ltDescM = */LeanTween.move(objTarget, posGlobal, duration).setEase( LeanTweenType.easeOutQuad );
+		/*LTDescr ltDescS = */LeanTween.scale(objTarget, netData[idx].startScale, duration).setEase( LeanTweenType.easeOutQuad );
 		//Debug.Log ("ZOOM OUT: " + idx + ", target: " + netPoints[idx].name);
 	}
 

@@ -7,6 +7,7 @@ using UnityEngine.Analytics;  // Reference the Unity Analytics namespace
 
 public class GameController : MonoBehaviour {
 	public GameObject objCameraScreen = null;
+	public const float FADE_DURATION_DEFAULT = 2.0f;		//default duration for fade
 
 	[Serializable]
 	public class Waypoint {
@@ -181,9 +182,7 @@ public class GameController : MonoBehaviour {
 		case GameState.STATE_INVALID:
 			return;
 		case GameState.STATE_STARTUP:
-			if (objCameraScreen != null) {
-				LeanTween.alpha(objCameraScreen, to:0.0f, time:2.0f);
-			}
+			FadeOut(Color.white);
 			objLocal = FindWaypoint ("start");
 			objLocal.SetActive (true);
 			Quaternion targetRotation = objLocal.transform.rotation;
@@ -204,7 +203,34 @@ public class GameController : MonoBehaviour {
 			MovePlayer (objActive.transform.position, objActive.transform.rotation, null, true, moveDelay);
 		}
 	}
-		
+
+	/// ---------------- simple fade method --------------------
+	public void FadeIn(Color colorN, float fDuration=FADE_DURATION_DEFAULT) {
+		if (objCameraScreen != null) {
+			RectTransform rt = objCameraScreen.GetComponent<RectTransform>();
+			UnityEngine.UI.Image img = objCameraScreen.GetComponent<UnityEngine.UI.Image>();
+			if (img != null) {
+				colorN.a = 0.0f;
+				img.color = colorN;
+			}
+			if (rt != null) {
+				LeanTween.alpha(rt, to:1.0f, time:fDuration);
+			}
+		}
+	}
+
+	public void FadeOut(Color colorN, float fDuration=FADE_DURATION_DEFAULT) {
+		if (objCameraScreen != null) {
+			RectTransform rt = objCameraScreen.GetComponent<RectTransform>();
+			UnityEngine.UI.Image img = objCameraScreen.GetComponent<UnityEngine.UI.Image>();
+			if (img != null) {
+				img.color = colorN;
+			}
+			if (rt != null) {
+				LeanTween.alpha(rt, to:0.0f, time:fDuration);
+			}
+		}
+	}
 
 	/// ---------------- player movement capabilities --------------------
 

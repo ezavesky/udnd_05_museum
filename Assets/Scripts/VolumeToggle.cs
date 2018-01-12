@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class VolumeToggle : MonoBehaviour {
 	public GameObject[] muteObjects;
+	public UnityEvent toggleEvent = null;
 	protected float[] volumeObjects;
 	private const float TRANSITION_TIME = 1.0f;
 	
@@ -51,6 +53,9 @@ public class VolumeToggle : MonoBehaviour {
 				//tween between a few avalues
 				LeanTween.value(muteObjects[i], callOnUpdate:updateVolume, from:fValFrom, to:fValTo, time:VolumeToggle.TRANSITION_TIME);
 			}
+		}
+		if (toggleEvent != null) {
+			toggleEvent.Invoke();
 		}
 	}
 }

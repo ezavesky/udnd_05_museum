@@ -145,9 +145,10 @@ public class PlanInteract : MonoBehaviour {
 			nodeNew.load = 0.0f;
 			float randState = UnityEngine.Random.Range (0f,1f);
 			if (numGood > 0) {
-				nodeNew.load = nodeNew.force = randState + (VAL_GOOD-1);
-				numGood--;
-				nodeNew.activeLight = true;
+				//disable notion of 'good' for now
+				//nodeNew.load = nodeNew.force = randState + (VAL_GOOD-1);
+				//numGood--;
+				//nodeNew.activeLight = true;
 			} else if (numBad > 0) {
 				numBad--;
 				nodeNew.load = nodeNew.force = randState + VAL_BAD;
@@ -182,9 +183,31 @@ public class PlanInteract : MonoBehaviour {
 		lightNode.color = gradientGame.Evaluate ((node.load - VAL_BAD)/(VAL_GOOD - VAL_BAD));
 		lightNode.enabled = node.activeLight;
 		Debug.Log (lightNode.color);
+		/*
 		if (updateOthers) {
+			foreach  (PlanNode item in listGame) {
+				
+				
+				nodeNew.force = 0.0f;
+				nodeNew.load = 0.0f;
+				float randState = UnityEngine.Random.Range (0f,1f);
+				if (numGood > 0) {
+					nodeNew.load = nodeNew.force = randState + (VAL_GOOD-1);
+					numGood--;
+					nodeNew.activeLight = true;
+				} else if (numBad > 0) {
+					numBad--;
+					nodeNew.load = nodeNew.force = randState + VAL_BAD;
+					nodeNew.activeLight = true;
+				} else {
+					randState = 0.0f;
+				}
+			}
+
+
 			Debug.Log ("PlanInteract::RelightNode: Sorry, this functionality is not complete yet...");
 		}
+		*/
 	}
 
 	/// <summary>

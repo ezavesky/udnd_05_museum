@@ -270,7 +270,7 @@ public class GameController : MonoBehaviour {
 			return;
 		}
 
-		//disabled for now -- method for navigating along path with tween
+		//method for navigating along path with tween
 		if (objPath != null) {
 			//convert from objects into positions
 			Vector3[] posPath = new Vector3[objPath.Length+2];

@@ -1,10 +1,12 @@
 # udnd_05_museum
+This is a "museum" application for exploring Telecommunications Innovations in XR (TiXR).
 
 ## Design Documentation
-Looking for design documentation? Look no further than the [docs](docs) folder!
+Looking for design documentation? Look no further than the [docs](docs/README.md) folder!
 
 ## Screenshot overview
-TBND
+A screenshot of one exhibit room within the TiXR museum.
+![TiXR Enhanced Content Exhibit Room](docs/TiXR_home.jpg)
 
 ## Project Contents
 Quick description of contents within this repo.
@@ -14,30 +16,15 @@ Quick description of contents within this repo.
 * Assets - assets including GoogleVR SDK clips for project
 * ProjectSettings - project settings for builds
 * .gitignore - ignore file based on Unity footprint
-* build.zip - compressed build for Android
+* build.zip - compressed build for Android (stored via [git lfs](https://git-lfs.github.com/))
 * LICENSE - current license
 * README.md - this file
 * docs/ - examples of screenshots and solutions to puzzles
 
 ### Customizations
-TBD
-
-### Comments
-* Struggles:
-
-* video load lagging
-https://answers.unity.com/questions/17409/best-video-preparation-for-unity.html
-* Unity color pallete for low-vision - http://bconnelly.net/2013/10/creating-colorblind-friendly-figures/, http://www.perbang.dk/rgbgradient/
-
-* Future TODO:
-    * add furniture to main room for NOC-style viewership
-    * add moving videos or something dynamic to displays in main room
-    * make a game or inspection requirement for net room
-    * make additional info panel for various videos (net, vid360, plan, etc)
-    * improve lighting of toy city in net room
-    * add ceiling lighting for main room
-    * fix render texture of main click path (hide it?)
-    * tween audio in/out for room video room
+The major parts of this project were built from the ground up, using the source
+material and how it could adapted as min-games as the driving motivation.  Please
+check out the [design documentation](docs/README.md) for more information.
 
 ## Requirements
 Software and build environment requirements.

@@ -5,13 +5,11 @@ This is a "museum" application for exploring Telecommunications Innovations in X
 Looking for design documentation? Look no further than the [docs](docs/README.md) folder!
 
 ## Screenshot overview
-A screenshot of one exhibit room within the TiXR museum.
-![TiXR Enhanced Content Exhibit Room](docs/TiXR_home.jpg)
+A montage of the exhibits within the TiXR museum.
+![TiXR Enhanced Content Exhibit Room](docs/TiXR_home.png)
 
 ## Project Contents
 Quick description of contents within this repo.
-
-![Museum Overview](docs/screen_fullview.jpg)
 
 * Assets - assets including GoogleVR SDK clips for project
 * ProjectSettings - project settings for builds
